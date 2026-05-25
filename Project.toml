@@ -1,0 +1,13 @@
+name = "TOGOmega"
+uuid = "8e4c26da-8d74-4d91-8eb5-6328a20dd598"
+version = "1.0.0"
+authors = ["1m1 <imi@1m1.io>"]
+
+[deps]
+TOGREPL = "99a1b240-057c-4d61-b879-ade0146bce0c"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+TOGZMQServer = "8938e4ce-5c5c-42ac-aa38-58f6e5ea3caa"
+TOGgod = "3cd4964b-de73-4059-a3ed-5bf4fdcd466c"
+TOG = "894673ee-413c-4601-8a2e-415a0e884e29"
+TOGCommunicationServer = "f05f0ea4-d963-465d-8d2a-69fa7afe5123"
+TOGInstall = "737b443f-5b68-4fde-ac0f-501ab7f5c9a4"
