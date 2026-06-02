@@ -11,9 +11,11 @@ const Ω = 𝕋()
 
 # function awaken(gods)
 function awaken(;router::String, pub::String, tog::String, replport::Integer)
+    write("TOGOmega1","1")
     # Pkg.update()
     # write(joinpath(".tog", "pid"), getpid())
     @async serve_repl(replport)
+    write("TOGOmega1","2")
     TOGZMQServer.awaken(router=router,pub=pub,tog=tog, ω=Ω)
     TOGCommunicationServer.awaken(router=router, pub=pub)
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
