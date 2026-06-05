@@ -11,20 +11,20 @@ const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
 const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋()
 
 function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.tog())
-    @show getpid(), TOGAwaken.isrunning()
-    TOGAwaken.isrunning() && error("TOGOmega is already running.")
+    @show getpid(), TOGAwaken.isrunning!()
+    TOGAwaken.isrunning!() && error("TOGOmega is already running.")
     TOGAwaken.writepid()
     TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
     TOGCommunicationServer.awaken(router=router, pub=pub)
     @show "TOGOmega.jl is awake."
 end
 
-__precompile__(false)
-atexit(_ -> begin
-    @show "exiting ", Ωpath
+# __precompile__(false)
+atexit(n -> begin
+    @show "exiting ", n, Ωpath
     serialize(Ωpath, Ω)
     TOGAwaken.rmpid()
 end)
-__precompile__(true)
+# __precompile__(true)
 
 end
