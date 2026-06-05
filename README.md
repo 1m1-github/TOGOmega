@@ -24,7 +24,8 @@ Pkg.add("TOGOmega")'
 ## Run
 
 ```
-env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --interactive --quiet --module TOGOmega
+env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --interactive --quiet --eval 'using TOGOmega
+TOGOmega.awaken()'
 ```
 
 ## Update

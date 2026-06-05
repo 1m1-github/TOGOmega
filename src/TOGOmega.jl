@@ -3,50 +3,32 @@ module TOGOmega
 const T = Float32
 export T
 
-using Pkg, RemoteREPL, ArgParse
+using Pkg, RemoteREPL, ArgParse, Serialization
 using TOG: 𝕋, t
-using TOGZMQServer, TOGCommunicationServer, TOGAwaken, TOGREPL
+using TOGZMQServer, TOGCommunicationServer, TOGAwaken
 
-const Ω = 𝕋()
-
-println("A")
-flush(stdout)
+const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
+const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋()
 
 # function __init__()
 #     isfile(joinpath(DEPOT_PATH[1], "registries", "General.toml")) || Pkg.Registry.add("General")
 #     isfile(joinpath(DEPOT_PATH[1], "registries", "$(TOGLearning.REGISTRYNAME)", "Registry.toml")) || Pkg.Registry.add(url="$REGISTRYURL")
 # end
 
-(@main)(args) = awaken(
-    router=TOGAwaken.router(), 
-    pub=TOGAwaken.pub(),
-    tog=TOGAwaken.tog(),
-    replport=TOGAwaken.openport())
-# function awaken(gods)
-function awaken(; router::String, pub::String, tog::String, replport::Integer)
-    println("B")
-    flush(stdout)
-    @show 1
+function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.tog(), replport=TOGAwaken.openport())
+    @show replport, getpid()
     TOGAwaken.isrunning() && error("TOGOmega is already running.")
-    @show 2
     TOGAwaken.writepid()
-    @show 3
-    # write("TOGOmega1","1")
-    # Pkg.update()
-    # write(joinpath(".tog", "pid"), getpid())
     @async serve_repl(replport)
-    @show 4
-    # write("TOGOmega1","2")
     TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
-    @show 5
     TOGCommunicationServer.awaken(router=router, pub=pub)
-    # @show 6
-    # TOGREPL.awaken()
-    @show 7
-    TOGAwaken.rmpid()
-    @show 8
+    @show "TOGOmega.jl is awake."
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
     # TOGREPL.awaken(true)
+end
+function atexit()
+    serialize(Ωpath, Ω)
+    TOGAwaken.rmpid()
 end
 
 # function parse_commandline()
