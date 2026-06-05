@@ -20,11 +20,13 @@ function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.
 end
 
 # __precompile__(false)
-atexit(n -> begin
-    @show "exiting ", n, Ωpath
-    serialize(Ωpath, Ω)
-    TOGAwaken.rmpid()
-end)
+function __init__()
+    atexit(_ -> begin
+        @show "exiting ", Ωpath
+        serialize(Ωpath, Ω)
+        TOGAwaken.rmpid()
+    end)
+end
 # __precompile__(true)
 
 end
