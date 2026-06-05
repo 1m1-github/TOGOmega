@@ -19,10 +19,12 @@ function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.
     @show "TOGOmega.jl is awake."
 end
 
+__precompile__(false)
 atexit(_ -> begin
     @show "exiting ", Ωpath
     serialize(Ωpath, Ω)
     TOGAwaken.rmpid()
 end)
+__precompile__(true)
 
 end
