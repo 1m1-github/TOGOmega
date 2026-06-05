@@ -15,9 +15,9 @@ const Ω = 𝕋()
 # end
 
 (@main)(args) = awaken(
-    router=TOGAwaken.ROUTERLOCATION(), 
-    pub=TOGAwaken.PUBLOCATION(),
-    tog=TOGAwaken.TOGLOCATION(),
+    router=TOGAwaken.router(), 
+    pub=TOGAwaken.pub(),
+    tog=TOGAwaken.tog(),
     replport=TOGAwaken.openport())
 # function awaken(gods)
 function awaken(; router::String, pub::String, tog::String, replport::Integer)

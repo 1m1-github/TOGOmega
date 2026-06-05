@@ -30,7 +30,7 @@ env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=
 ## Update
 
 ```
-env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --interactive --quiet --eval 'using Pkg;Pkg.update()'
+env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --quiet --eval 'using Pkg;Pkg.update()'
 ```
 
 ## god
