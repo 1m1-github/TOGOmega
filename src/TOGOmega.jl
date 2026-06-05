@@ -41,8 +41,10 @@ function awaken(; router::String, pub::String, tog::String, replport::Integer)
     @show 5
     TOGCommunicationServer.awaken(router=router, pub=pub)
     @show 6
-    TOGAwaken.rmpid()
+    TOGREPL.awaken()
     @show 7
+    TOGAwaken.rmpid()
+    @show 8
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
     # TOGREPL.awaken(true)
 end
