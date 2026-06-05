@@ -3,20 +3,31 @@ module TOGOmega
 const T = Float32
 export T
 
-using Pkg, RemoteREPL
+using Pkg, RemoteREPL, ArgParse
 using TOG: 𝕋, t
-using TOGZMQServer, TOGCommunicationServer
+using TOGZMQServer, TOGCommunicationServer, TOGAwaken
 
 const Ω = 𝕋()
 
+# function __init__()
+#     isfile(joinpath(DEPOT_PATH[1], "registries", "General.toml")) || Pkg.Registry.add("General")
+#     isfile(joinpath(DEPOT_PATH[1], "registries", "$(TOGLearning.REGISTRYNAME)", "Registry.toml")) || Pkg.Registry.add(url="$REGISTRYURL")
+# end
+
+(@main)(args) = awaken(
+    router=TOGAwaken.ROUTERLOCATION(), 
+    pub=TOGAwaken.PUBLOCATION(),
+    tog=TOGAwaken.TOGLOCATION(),
+    replport=TOGAwaken.openport())
 # function awaken(gods)
-function awaken(;router::String, pub::String, tog::String, replport::Integer)
+function awaken(; router::String, pub::String, tog::String, replport::Integer)
+    TOGAwaken.isrunning() && error("TOGOmega is already running.")
     # write("TOGOmega1","1")
     # Pkg.update()
     # write(joinpath(".tog", "pid"), getpid())
     @async serve_repl(replport)
     # write("TOGOmega1","2")
-    TOGZMQServer.awaken(router=router,pub=pub,tog=tog, ω=Ω)
+    TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
     TOGCommunicationServer.awaken(router=router, pub=pub)
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
     # TOGREPL.awaken(true)
@@ -36,29 +47,29 @@ end
 #     return parse_args(s)
 # end
 
-# function (@main)(ARGS)
-# #     # Pkg.update()
-# #     # manifest = joinpath(dirname(Pkg.project().path), "Manifest.toml")
-# #     # prehash = hash(read(manifest))
-# #     # Pkg.update()
-# #     # posthash = hash(read(manifest))
-# #     # updated = prehash != posthash
-# #     # if updated
-# #     #     run(`tog `)
-# #     #     exit(0)
-# #     # end
-# #     # DEPOT_PATH[1]=joinpath(pwd(),".loopos")
-#     config = parse_commandline()
-#     if config["init"]
+# function (@main)(args)
+    # #     # Pkg.update()
+    # #     # manifest = joinpath(dirname(Pkg.project().path), "Manifest.toml")
+    # #     # prehash = hash(read(manifest))
+    # #     # Pkg.update()
+    # #     # posthash = hash(read(manifest))
+    # #     # updated = prehash != posthash
+    # #     # if updated
+    # #     #     run(`tog `)
+    # #     #     exit(0)
+    # #     # end
+    # #     # DEPOT_PATH[1]=joinpath(pwd(),".loopos")
+    #     config = parse_commandline()
+    #     if config["init"]
 
-#     end
-#     if config["update"]
-#         Pkg.update()
-#         # Pkg.Apps.update("tog")
-#         return
-#     end
-#     awaken(path=ARGS[1])
-# #     TOGInstall.awaken()
+    #     end
+    #     if config["update"]
+    #         Pkg.update()
+    #         # Pkg.Apps.update("tog")
+    #         return
+    #     end
+    #     awaken(path=ARGS[1])
+    # #     TOGInstall.awaken()
 # end
 
 end
