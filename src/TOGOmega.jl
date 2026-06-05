@@ -24,7 +24,7 @@ function awaken(; router::String, pub::String, tog::String, replport::Integer)
     @show 1
     TOGAwaken.isrunning() && error("TOGOmega is already running.")
     @show 2
-    writepid()
+    TOGAwaken.writepid()
     @show 3
     # write("TOGOmega1","1")
     # Pkg.update()
@@ -36,6 +36,8 @@ function awaken(; router::String, pub::String, tog::String, replport::Integer)
     @show 5
     TOGCommunicationServer.awaken(router=router, pub=pub)
     @show 6
+    TOGAwaken.rmpid()
+    @show 7
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
     # TOGREPL.awaken(true)
 end

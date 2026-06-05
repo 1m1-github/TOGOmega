@@ -1,6 +1,6 @@
 name = "TOGOmega"
 uuid = "8e4c26da-8d74-4d91-8eb5-6328a20dd598"
-version = "9.0.0"
+version = "10.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
