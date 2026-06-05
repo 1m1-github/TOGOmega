@@ -18,9 +18,11 @@ function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.
     TOGCommunicationServer.awaken(router=router, pub=pub)
     @show "TOGOmega.jl is awake."
 end
-function atexit()
+
+atexit(_ -> begin
+    @show "exiting ", Ωpath
     serialize(Ωpath, Ω)
     TOGAwaken.rmpid()
-end
+end)
 
 end
