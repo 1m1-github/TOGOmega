@@ -21,14 +21,21 @@ const Ω = 𝕋()
     replport=TOGAwaken.openport())
 # function awaken(gods)
 function awaken(; router::String, pub::String, tog::String, replport::Integer)
+    @show 1
     TOGAwaken.isrunning() && error("TOGOmega is already running.")
+    @show 2
+    writepid()
+    @show 3
     # write("TOGOmega1","1")
     # Pkg.update()
     # write(joinpath(".tog", "pid"), getpid())
     @async serve_repl(replport)
+    @show 4
     # write("TOGOmega1","2")
     TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
+    @show 5
     TOGCommunicationServer.awaken(router=router, pub=pub)
+    @show 6
     # [TOGInstall.awakengod(name=god, router=ROUTERLOCATION, pub=PUBLOCATION, tog=TOGLOCATION, replport=TOGInstall.openport()) for god = gods]
     # TOGREPL.awaken(true)
 end
