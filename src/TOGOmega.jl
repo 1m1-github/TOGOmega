@@ -5,9 +5,12 @@ export T
 
 using Pkg, RemoteREPL, ArgParse
 using TOG: 𝕋, t
-using TOGZMQServer, TOGCommunicationServer, TOGAwaken
+using TOGZMQServer, TOGCommunicationServer, TOGAwaken, TOGREPL
 
 const Ω = 𝕋()
+
+println("A")
+flush(stdout)
 
 # function __init__()
 #     isfile(joinpath(DEPOT_PATH[1], "registries", "General.toml")) || Pkg.Registry.add("General")
@@ -21,6 +24,8 @@ const Ω = 𝕋()
     replport=TOGAwaken.openport())
 # function awaken(gods)
 function awaken(; router::String, pub::String, tog::String, replport::Integer)
+    println("B")
+    flush(stdout)
     @show 1
     TOGAwaken.isrunning() && error("TOGOmega is already running.")
     @show 2
