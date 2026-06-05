@@ -40,8 +40,8 @@ function awaken(; router::String, pub::String, tog::String, replport::Integer)
     TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
     @show 5
     TOGCommunicationServer.awaken(router=router, pub=pub)
-    @show 6
-    TOGREPL.awaken()
+    # @show 6
+    # TOGREPL.awaken()
     @show 7
     TOGAwaken.rmpid()
     @show 8
