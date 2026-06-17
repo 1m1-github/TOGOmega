@@ -1,15 +1,13 @@
 module TOGOmega
 
-export T, t
-
-const T = Float32
+export t
 
 using Pkg, Serialization
 using TOG: 𝕋
 using TOGZMQServer, TOGCommunicationServer, TOGAwaken
 
 const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
-const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋(T)
+const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋(Float32)
 import TOG: t
 t() = t(Ω)
 
