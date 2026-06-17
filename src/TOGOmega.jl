@@ -9,13 +9,13 @@ using TOG: 𝕋
 using TOGZMQServer, TOGCommunicationServer, TOGAwaken
 
 const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
-const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋()
+const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋(T)
 import TOG: t
 t() = t(Ω)
 
 function __init__()
     atexit(_ -> begin
-        serialize(Ωpath, Ω)
+        # serialize(Ωpath, Ω)
         TOGAwaken.rmpid()
     end)
 end
