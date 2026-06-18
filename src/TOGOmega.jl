@@ -6,7 +6,7 @@ const T = Float32
 
 using Pkg, Serialization
 using TOG: 𝕋
-using TOGZMQServer, TOGCommunicationServer, TOGAwaken
+using TOGZMQServer, TOGCommunicationServer, TOGAwaken, TOGLogging
 
 const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
 const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋(T)
@@ -21,6 +21,7 @@ function __init__()
 end
 
 function awaken(; router=TOGAwaken.router(), pub=TOGAwaken.pub(), tog=TOGAwaken.tog())
+    TOGLogging.awaken()
     TOGAwaken.isrunning() && error("TOGOmega is already running.")
     TOGAwaken.writepid()
     TOGZMQServer.awaken(router=router, pub=pub, tog=tog, ω=Ω)
