@@ -2,7 +2,7 @@ module TOGOmega
 
 export t, T
 
-const T = Float32
+const T = Float64
 
 using Pkg, Serialization
 using TOG: 𝕋
