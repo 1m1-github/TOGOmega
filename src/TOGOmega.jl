@@ -7,6 +7,7 @@ const T = Float64
 using Pkg, Serialization
 using TOG: 𝕋
 using TOGZMQServer, TOGCommunicationServer, TOGAwaken, TOGLogging
+using TOGColor, Colors # DEBUG?
 
 const Ωpath = joinpath(TOGAwaken.TOGDIR, "Ω")
 const Ω = isfile(Ωpath) ? deserialize(Ωpath) : 𝕋(T)
