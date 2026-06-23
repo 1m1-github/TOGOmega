@@ -18,6 +18,8 @@ function __init__()
     atexit(_ -> begin
         # serialize(Ωpath, Ω)
         TOGAwaken.rmpid()
+        TOGZMQServer.sleep()
+        TOGCommunicationServer.sleep()
     end)
 end
 
